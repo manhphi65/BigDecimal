@@ -446,6 +446,9 @@ extension BigDecimal {
             } else {
                 return powInteger(x, y, mc)
             }
+        } else {
+            //if x negative, and y is not Int, log(x) will not pass precondition, throw fatal, it should be NaN.
+            if x.isNegative { return nan }
         }
 
         // x^y = exp(y*log(x))

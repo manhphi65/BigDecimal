@@ -17,5 +17,7 @@ class TestPow: XCTestCase {
     XCTAssertEqual(BigDecimal("5.5").pow(3).asString(), "166.375")
     XCTAssertEqual(BigDecimal.pow(BigDecimal("5.5"), BigDecimal("3.2")).asString(), "233.9702323679928009901371156854989")
     XCTAssertEqual(BigDecimal.pow(BigDecimal("2"), BigDecimal("-4")).asString(), "0.0625")
+    XCTAssertEqual(BigDecimal.pow(BigDecimal("-2"), BigDecimal("3")).asString(), "-8")
+    XCTAssertEqual(BigDecimal.pow(BigDecimal("-2"), BigDecimal("3.1")).asString(), "NaN")
   }
 }
