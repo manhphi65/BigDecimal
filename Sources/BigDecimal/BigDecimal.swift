@@ -7,7 +7,7 @@
 
 import Foundation   // For Data/Decimal data types
 import BigInt       // Basis for digit storage and conversions
-import UInt128      // For UInt128 data type
+// import UInt128      // For UInt128 data type
 
 public typealias Sign = FloatingPointSign
 
@@ -20,7 +20,7 @@ public typealias Sign = FloatingPointSign
 /// There are three special ``BigDecimal`` values: ``nan`` designating
 /// Not a Number, ``infinity`` designating Infinity, ``signalingNaN``
 /// designating a Signaling Not a Number.
-public struct BigDecimal : Comparable, Equatable, Hashable, Codable {
+public struct BigDecimal : Comparable, Equatable, Hashable, Codable, Sendable {
     
     // MARK: - Constants
     
@@ -249,13 +249,12 @@ extension BigDecimal : Strideable {
 }
 
 extension BigDecimal : ExpressibleByIntegerLiteral {
-//    public init(integerLiteral value: StaticBigInt) {
-//        let bint = BInt(integerLiteral: value)
-//        self = Self(bint)
-//    }
-    public init(integerLiteral value: Int) {
-        self.init(value)
+    
+    public init(integerLiteral value: StaticBigInt) {
+        self = Self(BInt(integerLiteral: value))
     }
+    
+    public typealias IntegerLiteralType = StaticBigInt
 }
 
 extension BigDecimal : SignedNumeric {
